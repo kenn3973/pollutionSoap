@@ -15,6 +15,10 @@ namespace pollutionSoap
         [OperationContract]
         IList<Measurements> GetAllData();
 
+
+        [OperationContract]
+        int AddData(int data);
+
     }
 
 

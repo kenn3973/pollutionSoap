@@ -34,6 +34,27 @@ namespace pollutionSoap
             return measurements;
         }
 
+        public int AddData(int data)
+        {
+            const string selectAllSensorData = "INSERT INTO dbo.Measurements (Measurement) VALUES (@data)";
+
+            using (SqlConnection databaseConnection = new SqlConnection(connStr))
+            {
+                databaseConnection.Open();
+                using (SqlCommand insertCommand = new SqlCommand(selectAllSensorData, databaseConnection))
+                {
+                    insertCommand.Parameters.AddWithValue("@data", data);
+
+                    int rowsAffected = insertCommand.ExecuteNonQuery();
+                    return rowsAffected;
+                }
+            }
+        }
+
+
+
+
+
         public IList<Measurements> GetAllData()
         {
             const string selectAllSensorData = "SELECT* FROM dbo.Measurements order by Id";
